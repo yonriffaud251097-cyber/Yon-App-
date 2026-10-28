@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173d35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Ma Tournée">
+  <meta name="description" content="Organisez vos arrêts de livraison et ouvrez chaque adresse dans Waze.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Ma Tournée</title>
+</head>
+<body>
+  <header class="top">
+    <div class="brand-icon" aria-hidden="true">↗</div>
+    <div><h1>Ma Tournée</h1><p>Votre tournée, simplement.</p></div>
+    <button id="installHelp" class="icon-button" aria-label="Installer l'application" title="Installer">＋</button>
+  </header>
+
+  <main>
+    <section class="summary">
+      <div><span class="eyebrow">TOURNÉE DU JOUR</span><h2 id="progressTitle">0 / 0 arrêt terminé</h2></div>
+      <button id="clearDone" class="text-button">Effacer les terminés</button>
+      <div class="progress"><span id="progressBar"></span></div>
+    </section>
+
+    <section class="panel">
+      <h2>Ajouter des adresses</h2>
+      <p class="muted">Ajoutez une adresse par ligne. Jusqu'à 500 arrêts sont pris en charge.</p>
+      <label for="addressInput" class="sr-only">Adresses à ajouter</label>
+      <textarea id="addressInput" rows="4" placeholder="12 rue de la Paix, Paris&#10;25 avenue Victor Hugo, Paris&#10;..."></textarea>
+      <div class="actions">
+        <button id="addAddresses" class="primary">Ajouter les adresses</button>
+        <button id="importButton" class="secondary">Importer un fichier</button>
+        <input id="fileInput" type="file" accept=".txt,.csv,text/plain,text/csv" hidden>
+      </div>
+      <p class="hint">Import TXT ou CSV : une adresse par ligne. Pour un CSV, la première colonne est utilisée.</p>
+    </section>
+
+    <section class="list-head">
+      <div><h2>Mes arrêts</h2><p id="countText" class="muted">0 adresse</p></div>
+      <div class="list-actions">
+        <button id="exportButton" class="secondary small">Exporter</button>
+        <button id="sortButton" class="secondary small">Trier A–Z</button>
+      </div>
+    </section>
+    <div id="emptyState" class="empty">
+      <div class="empty-symbol">⌖</div><strong>Votre tournée commence ici</strong>
+      <p>Ajoutez vos adresses ci-dessus pour créer votre liste d'arrêts.</p>
+    </div>
+    <ol id="stopsList" class="stops"></ol>
+    <button id="clearAll" class="danger-link">Supprimer tous les arrêts</button>
+    <p class="footnote">Les données sont enregistrées sur cet appareil dans ce navigateur. Exportez régulièrement une copie de votre tournée.</p>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-active" type="button"><span>⌖</span> Tournée</button>
+    <button id="navAdd" type="button"><span>＋</span> Ajouter</button>
+  </nav>
+
+  <dialog id="installDialog">
+    <form method="dialog">
+      <h2>Ajouter Ma Tournée à l'écran d'accueil</h2>
+      <p>Dans Safari sur iPhone :</p>
+      <ol><li>Appuyez sur le bouton <strong>Partager</strong> (le carré avec la flèche vers le haut).</li><li>Choisissez <strong>Sur l'écran d'accueil</strong>.</li><li>Appuyez sur <strong>Ajouter</strong>.</li></ol>
+      <button class="primary full">Compris</button>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
